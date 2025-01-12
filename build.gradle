@@ -1,0 +1,24 @@
+plugins {
+    id "application"
+}
+
+sourceCompatibility = 21
+targetCompatibility = 21
+
+[compileJava, compileTestJava]*.options*.encoding = "UTF-8"
+
+repositories {
+    mavenCentral()
+}
+
+mainClassName = "wbs.Main"
+
+dependencies {
+    implementation "org.eclipse:yasson:3.0.4"
+    testImplementation "org.junit.jupiter:junit-jupiter:5.11.4"
+    testImplementation "org.assertj:assertj-core:3.27.2"
+}
+
+test {
+    useJUnitPlatform()
+}

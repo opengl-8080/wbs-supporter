@@ -1,0 +1,25 @@
+{
+    "holidays": [
+        "2025-01-13", "2025-02-11", "2025-02-24"
+    ],
+    "firstReviewRate": 0.20,
+    "members": {
+        "Taro": {
+            "organization": "A",
+            "availabilityRate": 0.40,
+            "vacations": [
+                "2025-01-14"
+            ]
+        },
+        "Jiro": {
+            "organization": "A",
+            "availabilityRate": 0.90,
+            "vacations": []
+        },
+        "Mike": {
+            "organization": "B",
+            "availabilityRate": 0.80,
+            "vacations": []
+        }
+    }
+}
