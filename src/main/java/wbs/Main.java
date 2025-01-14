@@ -29,30 +29,41 @@ public class Main {
 
         final Console console = System.console();
         while (true) {
-            final String line = console.readLine("> ");
-            final String[] tokens = line.split(",");
+            try {
+                final String line = console.readLine("> ");
+                if (line.isEmpty() || line.isBlank()) {
+                    // から入力の場合はスキップ
+                    continue;
+                } else if ("exit".equals(line)) {
+                    break;
+                }
+                
+                final String[] tokens = line.split(",");
 
-            final TotalManHour totalManHour = new TotalManHour(new BigDecimal(tokens[0]));
-            final MemberName taskMemberName = new MemberName(tokens[1]);
-            final TaskStartDate startDate = new TaskStartDate(LocalDate.parse(tokens[2]));
-            final SecondReviewManHour secondReviewManHour = new SecondReviewManHour(new BigDecimal(tokens[3]));
-            final MemberName secondReviewerName = new MemberName(tokens[4]);
+                final TotalManHour totalManHour = new TotalManHour(new BigDecimal(tokens[0]));
+                final MemberName taskMemberName = new MemberName(tokens[1]);
+                final TaskStartDate startDate = new TaskStartDate(LocalDate.parse(tokens[2]));
+                final SecondReviewManHour secondReviewManHour = new SecondReviewManHour(new BigDecimal(tokens[3]));
+                final MemberName secondReviewerName = new MemberName(tokens[4]);
 
-            final Result result = wbsSupporter.execute(
+                final Result result = wbsSupporter.execute(
                     totalManHour,
                     taskMemberName,
                     startDate,
                     secondReviewManHour,
                     secondReviewerName
-            );
+                );
 
-            System.out.printf("%s,%s,%s,%s,%s%n",
+                System.out.printf("%s,%s,%s,%s,%s%n",
                     result.taskEndDate().value(),
                     result.firstReviewStartDate().value(),
                     result.firstReviewEndDate().value(),
                     result.secondReviewStartDate().value(),
                     result.secondReviewEndDate().value()
-            );
+                );
+            } catch (Exception e) {
+                e.printStackTrace(System.err);
+            }
         }
     }
 }
