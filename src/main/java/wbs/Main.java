@@ -1,5 +1,6 @@
 package wbs;
 
+import java.time.format.DateTimeFormatter;
 import wbs.config.ConfigLoader;
 import wbs.domain.Result;
 import wbs.domain.WbsSupporter;
@@ -27,6 +28,7 @@ public class Main {
 
         final WbsSupporter wbsSupporter = new WbsSupporter(config);
 
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu/M/d");
         final Console console = System.console();
         while (true) {
             try {
@@ -55,11 +57,11 @@ public class Main {
                 );
 
                 System.out.printf("%s,%s,%s,%s,%s%n",
-                    result.taskEndDate().value(),
-                    result.firstReviewStartDate().value(),
-                    result.firstReviewEndDate().value(),
-                    result.secondReviewStartDate().value(),
-                    result.secondReviewEndDate().value()
+                    formatter.format(result.taskEndDate().value()),
+                    formatter.format(result.firstReviewStartDate().value()),
+                    formatter.format(result.firstReviewEndDate().value()),
+                    formatter.format(result.secondReviewStartDate().value()),
+                    formatter.format(result.secondReviewEndDate().value())
                 );
             } catch (Exception e) {
                 e.printStackTrace(System.err);
