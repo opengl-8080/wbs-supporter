@@ -42,6 +42,7 @@ public class WbsSupporter {
 
         CalendarDate taskEndDate = endDate.calculate(
             taskManHour,
+            config.getLeadTimeRate(),
             startDate,
             taskMember.getAvailabilityRate()
         );
@@ -53,6 +54,7 @@ public class WbsSupporter {
         AverageOfAvailabilityInOrg averageOfAvailabilityInOrg = members.averageOfAvailabilityInOrg(taskMemberName);
         CalendarDate firstReviewEndDate = endDate.calculate(
             firstReviewManHour,
+            config.getLeadTimeRate(),
             firstReviewStartDate,
             averageOfAvailabilityInOrg
         );
@@ -64,6 +66,7 @@ public class WbsSupporter {
         // 2次レビュー終了日
         CalendarDate secondReviewEndDate = endDate.calculate(
             secondReviewManHour,
+            config.getLeadTimeRate(),
             secondReviewStartDate,
             secondReviewMember.getAvailabilityRate()
         );

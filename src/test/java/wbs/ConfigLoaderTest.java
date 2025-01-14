@@ -3,6 +3,7 @@ package wbs;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import wbs.config.ConfigLoader;
+import wbs.domain.LeadTimeRate;
 import wbs.domain.config.Config;
 import wbs.domain.date.Holiday;
 import wbs.domain.firstreview.FirstReviewRate;
@@ -32,6 +33,7 @@ class ConfigLoaderTest {
                 "2025-01-13", "2025-02-11", "2025-02-24"
               ],
               "firstReviewRate": 0.20,
+              "leadTimeRate": 1.20,
               "members": {
                 "Taro": {
                   "organization": "A",
@@ -66,6 +68,8 @@ class ConfigLoaderTest {
             );
 
             assertThat(result.getFirstReviewRate()).isEqualTo(new FirstReviewRate("0.20"));
+            
+            assertThat(result.getLeadTimeRate()).isEqualTo(new LeadTimeRate("1.20"));
 
             assertThat(result.getMembers()).usingRecursiveComparison()
                     .ignoringCollectionOrder()

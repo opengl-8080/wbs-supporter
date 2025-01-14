@@ -2,6 +2,7 @@ package wbs.config;
 
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
+import wbs.domain.LeadTimeRate;
 import wbs.domain.config.Config;
 import wbs.domain.date.Holiday;
 import wbs.domain.firstreview.FirstReviewRate;
@@ -26,6 +27,7 @@ public class ConfigLoader {
             final Config config = new Config();
 
             config.setFirstReviewRate(new FirstReviewRate(configBean.firstReviewRate));
+            config.setLeadTimeRate(new LeadTimeRate(configBean.leadTimeRate));
             config.setHolidays(configBean.holidays.stream().map(Holiday::new).toList());
 
             List<Member> members = new ArrayList<>();

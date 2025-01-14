@@ -9,4 +9,6 @@ public class ConfigBean {
     public BigDecimal firstReviewRate;
     public List<LocalDate> holidays;
     public Map<String, MemberBean> members;
+    
+    public BigDecimal leadTimeRate;
 }

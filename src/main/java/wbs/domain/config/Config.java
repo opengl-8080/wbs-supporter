@@ -1,5 +1,6 @@
 package wbs.domain.config;
 
+import wbs.domain.LeadTimeRate;
 import wbs.domain.date.Holiday;
 import wbs.domain.firstreview.FirstReviewRate;
 import wbs.domain.member.Members;
@@ -11,6 +12,8 @@ public class Config {
     private List<Holiday> holidays;
     private FirstReviewRate firstReviewRate;
     private Members members;
+    
+    private LeadTimeRate leadTimeRate;
 
     public List<Holiday> getHolidays() {
         return holidays;
@@ -34,5 +37,13 @@ public class Config {
 
     public void setMembers(Members members) {
         this.members = members;
+    }
+
+    public LeadTimeRate getLeadTimeRate() {
+        return leadTimeRate;
+    }
+
+    public void setLeadTimeRate(LeadTimeRate leadTimeRate) {
+        this.leadTimeRate = leadTimeRate;
     }
 }

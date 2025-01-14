@@ -22,6 +22,8 @@ class EndDateCalculatorTest {
         /*
          * 実稼働率: 0.4
          * 必要工数: 1.5
+         * リードタイム割合: 1.2
+         * 実期間: 1.5 * 1.2 = 1.8
          *
          * 1/10(金) 0.4 (0.4) ※開始日
          * 1/11(土) -
@@ -30,10 +32,14 @@ class EndDateCalculatorTest {
          * 1/14(火) 0.4 (0.8)
          * 1/15(水) - ※休暇
          * 1/16(木) 0.4 (1.2)
-         * 1/17(金) 0.4 (1.6) ※終了日
+         * 1/17(金) 0.4 (1.6)
+         * 1/18(土) -
+         * 1/19(日) -
+         * 1/20(月) 0.4 (2.0) ※終了日
          */
 
         ManHour manHour = () -> new BigDecimal("1.5");
+        LeadTimeRate leadTimeRate = new LeadTimeRate("1.20");
         CalendarDate startDate = new CalendarDate(
                 LocalDate.parse("2025-01-10"),
                 List.of(new Holiday("2025-01-13")),
@@ -42,33 +48,38 @@ class EndDateCalculatorTest {
 
         CalendarDate endDate = sut.calculate(
             manHour,
+            leadTimeRate,
             startDate,
             availabilityRate
         );
 
-        assertThat(endDate.value()).isEqualTo("2025-01-17");
+        assertThat(endDate.value()).isEqualTo("2025-01-20");
     }
 
     @Test
     @DisplayName("残工数が0丁度になるケース")
     void test2() {
         /*
-         * 実稼働率: 0.5
+         * 実稼働率: 0.6
          * 必要工数: 1.0
+         * リードタイム割合: 1.2
+         * 実期間: 1.0 * 1.2 = 1.2
          *
-         * 1/14(火) 0.5 (0.5) ※終了日
-         * 1/15(水) 0.5 (1.0) ※終了日
+         * 1/14(火) 0.6 (0.6) ※開始日
+         * 1/15(水) 0.6 (1.2) ※終了日
          */
 
         ManHour manHour = () -> new BigDecimal("1.0");
+        LeadTimeRate leadTimeRate = new LeadTimeRate("1.2");
         CalendarDate startDate = new CalendarDate(
                 LocalDate.parse("2025-01-14"),
                 List.of(),
                 List.of());
-        AvailabilityRate availabilityRate = () -> new BigDecimal("0.50");
+        AvailabilityRate availabilityRate = () -> new BigDecimal("0.60");
 
         CalendarDate endDate = sut.calculate(
             manHour,
+            leadTimeRate,
             startDate,
             availabilityRate
         );

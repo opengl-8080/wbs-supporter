@@ -11,15 +11,16 @@ public class EndDateCalculator {
 
     public CalendarDate calculate(
             ManHour manHour,
+            LeadTimeRate leadTimeRate,
             CalendarDate startDate,
             AvailabilityRate availabilityRate) {
 
-        // 残工数
-        BigDecimal restManHour = manHour.value();
+        // 残日数
+        BigDecimal restDays = manHour.leadTime(leadTimeRate);
         CalendarDate currentDate = startDate.previousDate();
-        while (BigDecimal.ZERO.compareTo(restManHour) < 0) { // 残工数が 0 を切るまで繰り返す
+        while (BigDecimal.ZERO.compareTo(restDays) < 0) { // 残日数が 0 を切るまで繰り返す
             currentDate = currentDate.nextAvailabilityDate();
-            restManHour = restManHour.add(minus(availabilityRate.value()));
+            restDays = restDays.add(minus(availabilityRate.value()));
         }
 
         return currentDate;
